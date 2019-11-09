@@ -1,26 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+import Button from "./components/Button"
+import CharacterContainer from "./components/CharacterContainer";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 className="Header">Async-Redux-Wars</h1>
+      <Button className="left" name={"Get Characters"}></Button>
+      <CharacterContainer ></CharacterContainer>
     </div>
   );
+  // return (
+  //   <div className="App">
+  //     <h1 className="Header">React Wars</h1>
+  //     <CharacterContainer characters={characters}></CharacterContainer>
+  //     <Button className="left" onClick={leftClick} name={"\u00AB"}></Button>
+  //     <StyledSpan>Page</StyledSpan>
+  //     <Button className="right" onClick={rightClick} name={"\u00BB"}></Button>
+  //   </div>
+  // );
 }
 
 export default App;
