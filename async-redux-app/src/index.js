@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { Provider } from "react-redux";
-import { store } from
-    ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
+import { store } from "./reducers"
+
+
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 

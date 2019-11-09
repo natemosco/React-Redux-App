@@ -1,37 +1,34 @@
 import { createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
-import { REMOVE_FEATURE, BUY_ITEM } from "../actions"
+import { FETCH_CHARACTERS_START, FETCH_CHARACTERS_SUCCESS, FETCH_CHARACTERS_FAILURE } from "../actions"
 
 const initialState = {
-    characters: []
+    characters: [],
+    error: "",
+    isFetching: false
 };
 
 function reducer(state = initialState, action) {
     switch (action.type) {
-        case "BUY_ITEM":
-            if (state.car.features.filter(obj => obj.id === action.payload.id).length === 0) {
-                return {
-                    ...state,
-                    additionalPrice: state.additionalPrice + action.payload.price,
-                    car: {
-                        ...state.car,
-                        features: [...state.car.features, action.payload]
-                    }
-                }
-            } else {
-                return state;
-            }
-
-        case "REMOVE_FEATURE":
+        case FETCH_CHARACTERS_START:
             return {
                 ...state,
-                additionalPrice: state.additionalPrice - action.payload.price,
-                car: {
-                    ...state.car,
-                    features: state.car.features.filter(obj => (obj.id !== action.payload.id))
-                }
-            };
+                error: "",
+                isFetching: true
+            }
+        case FETCH_CHARACTERS_SUCCESS:
+            return {
+                ...state,
+                characters: action.payload,
+                isFetching: false
+            }
+        case FETCH_CHARACTERS_FAILURE:
+            return {
+                ...state,
+                error: action.payload,
+                isFetching: false
+            }
         default:
             return state;
     }
@@ -39,7 +36,7 @@ function reducer(state = initialState, action) {
 }
 
 
-const store = createStore(reducer);
+const store = createStore(reducer, applyMiddleware(thunk, logger));
 
 export { reducer, store }
 

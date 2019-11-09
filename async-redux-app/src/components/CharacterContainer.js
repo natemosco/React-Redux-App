@@ -1,6 +1,7 @@
 import React from 'react'
 import CharacterCard from './CharacterCard'
 import styled from "styled-components";
+import { connect } from "react-redux";
 
 const StyledCharacterContainer = styled.div`
     box-sizing:border-box;
@@ -12,7 +13,7 @@ const StyledCharacterContainer = styled.div`
     justify-content:space-evenly;
 `;
 
-export default function CharacterContainer(props) {
+function CharacterContainer(props) {
     return (
         <StyledCharacterContainer>
             {props.characters.map((character, index) => {
@@ -21,3 +22,11 @@ export default function CharacterContainer(props) {
         </StyledCharacterContainer>
     )
 }
+
+const mapStateToProps = state => {
+    return {
+        characters: state.characters
+    }
+}
+
+export default connect(mapStateToProps, {})(CharacterContainer)
